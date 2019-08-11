@@ -1,0 +1,5 @@
+#define URL_1 "/sendmsg?user=ID1&pass=PASSWORD2&msg=MSG1"
+#define URL_2 "/sendmsg?user=ID1&pass=PASSWORD2&msg=MSG2"
+
+#define WIFI_SSID  "SSID"
+#define WIFI_PASSWORD "PASSWORD"
