@@ -1,6 +1,7 @@
 # Ma, I’m home
 
 That project is a connected button which, when pressed, send a SMS to people. It’s used by my son, to text me when he’s back from school.
+You can [see it in action on youtube](https://www.youtube.com/watch?v=YSLezdGY_Ck).
 
 ## Instructions
 
@@ -13,8 +14,8 @@ That project is a connected button which, when pressed, send a SMS to people. It
 - DTR from FTDI to GPIO 0 on ESP
 - RST from FTDI to RST on ESP
 - CH_PD from ESP to VCC
-- GPIO 15 from ESP to ground 
-- 
+- GPIO 15 from ESP to ground
+-
 ## Software
 
 copy `parameters.h.dist` to `parameters.h` and replace wifi SSID and password. You can use SMS free mobile API but it can only send SMS to your mobile phone, not any random number. You would have to change host and URL if you’re using another celullar provider.
