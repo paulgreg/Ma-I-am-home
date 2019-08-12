@@ -1,5 +1,10 @@
-#define URL_1 "/sendmsg?user=ID1&pass=PASSWORD2&msg=MSG1"
-#define URL_2 "/sendmsg?user=ID1&pass=PASSWORD2&msg=MSG2"
-
 #define WIFI_SSID  "SSID"
 #define WIFI_PASSWORD "PASSWORD"
+
+const int URLS_SIZE = 1;
+const char* URLS[] = {
+  "/sendmsg?user=USER_ID&pass=PASSWORD&msg=MESSAGE"
+};
+
+#define HOST "smsapi.free-mobile.fr"
+#define HOST_CERTIFICATE_FINGERPRINT "3B 5C 64 35 F5 28 BF 1C FA 96 DC E7 65 B1 E1 B3 2E 84 35 77";
