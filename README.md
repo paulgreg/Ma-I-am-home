@@ -7,15 +7,21 @@ You can [see it in action on youtube](https://www.youtube.com/watch?v=YSLezdGY_C
 
 ### ESP8266 Connections
 
+I’m using a ESP8266 ESP-12 with an adapter plate including resistors, not included in my schematic.
+
+![connections](Ma-I-am-homefzz_bb.png)
+
 - VCC to 3.3
 - Ground to ground
+- CH_PD from ESP to VCC
+- LED + connected to a 220 ohm resistor and to VCC
+- LED - connected to GPIO5
+- Button connected to ground and RESET on ESP
 - RX from FTDI to TX on ESP
 - TX from FTDI to RX on ESP
 - DTR from FTDI to GPIO 0 on ESP
-- RST from FTDI to RST on ESP
-- CH_PD from ESP to VCC
-- GPIO 15 from ESP to ground
--
+- RST from FTDI to RESET on ESP
+
 ## Software
 
 copy `parameters.h.dist` to `parameters.h` and replace wifi SSID and password. You can use SMS free mobile API but it can only send SMS to your mobile phone, not any random number. You would have to change host and URL if you’re using another celullar provider.
