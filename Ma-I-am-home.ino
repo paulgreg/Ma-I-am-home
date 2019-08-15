@@ -12,6 +12,7 @@
 const char host_certificate_fingerprint[] PROGMEM = HOST_CERTIFICATE_FINGERPRINT
 
 void setup() {
+  // The button will trigger reset and so, boot the esp8266
   pinMode(LED, OUTPUT);
   pinMode(BUTTON, INPUT);
   Serial.begin(74880);
@@ -30,11 +31,11 @@ void setup() {
   }
 
   Serial.println("Sleeping");
-  ESP.deepSleep(0);
+  ESP.deepSleep(0); // Sleeping until next time button is pressed, which will boot the microcontroller
 }
 
 void loop() {
-  // sleeping so wont get here
+  // sleeping at the end of setup so will never get here
 }
 
 boolean connectToWifi() {
