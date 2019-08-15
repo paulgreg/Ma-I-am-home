@@ -18,16 +18,16 @@ void setup() {
   while (!Serial);
   Serial.println("Connected button");
   blinkOnce();
-  
-  connectToWifi();
-  for (int i = 0; i < URLS_SIZE; i++) {
-    blinkOnce();
-    get(HOST, URLS[i]);
-    blinkOnce();
-  }
-  WiFi.mode(WIFI_OFF);
 
-  longBlinkOnce();
+  if (connectToWifi()) {
+    for (int i = 0; i < URLS_SIZE; i++) {
+      blinkOnce();
+      get(HOST, URLS[i]);
+      blinkOnce();
+    }
+    WiFi.mode(WIFI_OFF);
+    longBlinkOnce();
+  }
 
   Serial.println("Sleeping");
   ESP.deepSleep(0);
@@ -37,23 +37,28 @@ void loop() {
   // sleeping so wont get here
 }
 
-void connectToWifi() {
-  Serial.println("");
-  Serial.print("connecting to ");
+boolean connectToWifi() {
+  Serial.print("\nconnecting to ");
   Serial.println(WIFI_SSID);
 
   WiFi.forceSleepWake();
-  WiFi.mode(WIFI_STA);  
+  WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
+  unsigned int retries = 50;
+  while (WiFi.status() != WL_CONNECTED && (retries-- > 0)) {
     blinkOnce();
     Serial.print(".");
+  }
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("\nWifi connection failed");
+    return false;
   }
   Serial.println("");
   Serial.println("wifi connected");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.println("");
+  return true;
 }
 
 boolean get(const char* host, const char* url) {
@@ -63,7 +68,7 @@ boolean get(const char* host, const char* url) {
   Serial.print(host);
 
   client.setFingerprint(host_certificate_fingerprint);
-  client.setTimeout(15000);
+  client.setTimeout(10000);
 
   unsigned int retries = 5;
   while(!client.connect(host, 443) && (retries-- > 0)) {
@@ -72,8 +77,7 @@ boolean get(const char* host, const char* url) {
   }
 
   if(!client.connect(host, 443)) {
-    Serial.println("");
-    Serial.println("connection failed");
+    Serial.println("\nRequest failed");
     return false;
   }
 
@@ -110,5 +114,5 @@ void longBlinkOnce() {
     delay(500);
     digitalWrite(LED, LOW);
     delay(500);
-  }  
+  }
 }
