@@ -45,7 +45,7 @@ boolean connectToWifi() {
   WiFi.forceSleepWake();
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  unsigned int retries = 50;
+  unsigned int retries = 100;
   while (WiFi.status() != WL_CONNECTED && (retries-- > 0)) {
     blinkOnce();
     Serial.print(".");
@@ -71,7 +71,7 @@ boolean get(const char* host, const char* url) {
   client.setFingerprint(host_certificate_fingerprint);
   client.setTimeout(10000);
 
-  unsigned int retries = 5;
+  unsigned int retries = 10;
   while(!client.connect(host, 443) && (retries-- > 0)) {
     blinkOnce();
     Serial.print(".");
