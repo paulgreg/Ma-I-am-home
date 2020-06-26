@@ -9,7 +9,9 @@
 #define WAIT 100
 #define REQUEST_TIMEOUT 5000
 
+#if VERIFY_CERTIFICATE
 const char host_certificate_fingerprint[] PROGMEM = HOST_CERTIFICATE_FINGERPRINT
+#endif
 
 void setup() {
   // The button will trigger reset and so, boot the esp8266
@@ -65,10 +67,18 @@ boolean connectToWifi() {
 boolean get(const char* host, const char* url) {
   WiFiClientSecure client;
   boolean status = false;
+
+  #if VERIFY_CERTIFICATE
+  Serial.println("Checking certificate fingerprint");
+  client.setFingerprint(host_certificate_fingerprint);
+  #else
+  Serial.println("Ignoring certificate fingerprint");
+  client.setInsecure();
+  #endif
+
   Serial.print(">  ");
   Serial.print(host);
-
-  client.setFingerprint(host_certificate_fingerprint);
+  
   client.setTimeout(10000);
 
   unsigned int retries = 10;

@@ -8,3 +8,4 @@ const char* URLS[] = {
 
 #define HOST "smsapi.free-mobile.fr"
 #define HOST_CERTIFICATE_FINGERPRINT "3B 5C 64 35 F5 28 BF 1C FA 96 DC E7 65 B1 E1 B3 2E 84 35 77";
+#define VERIFY_CERTIFICATE true
