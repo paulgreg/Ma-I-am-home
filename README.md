@@ -27,6 +27,8 @@ I’m using a ESP8266 ESP-12 with an adapter plate including resistors, not incl
 copy `parameters.h.dist` to `parameters.h` and replace wifi SSID and password. You can use SMS free mobile API but it can only send SMS to your mobile phone, not any random number. You would have to change host and URL if you’re using another celullar provider.
 Beware, you need to extract SHA1 TLS certificate finterprint and update it in order to make the TLS connection work.
 
+In arduino IDE, set `Node MCU 1.0 (ESP-12E module)` before compiling.
+
 ## links
 
   * [ESP8266 official doc](https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection)
